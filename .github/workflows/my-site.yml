@@ -24,6 +24,9 @@ jobs:
       - name: Lets test some package
         run : aws --version
         
+      - name: Whats folder
+        run : pwd
+        
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
