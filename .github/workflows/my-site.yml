@@ -32,4 +32,4 @@ jobs:
           aws-region: eu-central-1
           
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync /NewFolder s3://it-isa.com
+        run: aws s3 sync ./ s3://it-isa.com
