@@ -1,0 +1,35 @@
+#------------------------------------------------
+# GitHub Action 
+#
+# Copyleft (c) by ISA
+#-----------------------------------------------
+
+name: Build & deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy my files
+        uses: actions/checkout@v1
+        
+      - name: List files
+        run : ls -la
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+          
+      - name: Lets test some package
+        run : aws --version
+        
+      - name: Deploy static site to S3 bucket
+        run: aws s3 sync /NewFolder s3://it-isa.com
