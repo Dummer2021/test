@@ -17,10 +17,7 @@ jobs:
     steps:
       - name: Copy my files
         uses: actions/checkout@v1
-        
-      - name: List files
-        run : ls -la /home/runner/work/test/test
-            
+          
       - name: Change folder
         run : cd /home/runner/work/test/test
         
