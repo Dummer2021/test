@@ -1,0 +1,32 @@
+
+---
+
+- name: Install and Upload my Web Page
+  hosts: ec2
+  become: yes
+
+  vars: 
+   source_file: ./index.html
+   destin_file:  /var/www/html
+
+  tasks:
+  - name: Check LINUX ver
+    debug: var=ansible_os_family
+  
+  - name: Install Apache
+    yum: name=httpd state=latest
+
+
+  - name: Copy page to Server
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+    notify: Restart 
+
+  - name: Start Web and enable service
+    service: name=httpd state=started enabled=yes
+   
+ 
+  handlers:
+  - name: Restart
+    service: name=httpd state=restarted 
+
+...
